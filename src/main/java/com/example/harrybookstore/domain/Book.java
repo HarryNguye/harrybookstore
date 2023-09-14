@@ -4,25 +4,45 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String title;
-    private String author;
-    private int publicationYear;
-    private String isbn;
-    private double price;
-    
-    public Book(String title, String author, int publicationYear, String isbn, double price) {
-        this.title = title;
-        this.author = author;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.price = price;
-}
+	
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+	private String title;
+	private String author;
+	private long publicationYear;
+	private long isbn;
+	private long price;
+	
+    @ManyToOne
+    @JoinColumn(name = "categoryid")
+    private Category category;
+	
+
+	 public Book() {}
+	
+	public Book(String title, String author, long publicationYear, long isbn, long price) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.publicationYear = publicationYear;
+		this.isbn = isbn;
+		this.price = price;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 	public String getTitle() {
 		return title;
@@ -40,27 +60,37 @@ public class Book {
 		this.author = author;
 	}
 
-	public int getPublicationYear() {
+	public long getPublicationYear() {
 		return publicationYear;
 	}
 
-	public void setPublicationYear(int publicationYear) {
+	public void setPublicationYear(long publicationYear) {
 		this.publicationYear = publicationYear;
 	}
 
-	public String getIsbn() {
+	public long getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(String isbn) {
+	public void setIsbn(long isbn) {
 		this.isbn = isbn;
 	}
 
-	public double getPrice() {
+	public long getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ",title=" + title + ", author=" + author + ", publicationYear=" + publicationYear + ", isbn=" + isbn
+				+ ", price=" + price + "]";
+	}
+	
+	
+
+	
 }
