@@ -9,8 +9,9 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.harrybookstore.domain.CategoryRepository;
 import com.example.harrybookstore.domain.Category;
-import com.example.harrybookstore.domain.Book;
 import com.example.harrybookstore.domain.BookRepository;
+import com.example.harrybookstore.domain.Book;
+
 
 
 @SpringBootApplication
@@ -21,13 +22,13 @@ public class HarrybookstoreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HarrybookstoreApplication.class, args);
 	}
-@Bean
-		public CommandLineRunner studentDemo(BookRepository repository, CategoryRepository grepository) {
+		@Bean
+		public CommandLineRunner studentDemo(CategoryRepository repository, CategoryRepository grepository) {
 			return (args) -> {
 				log.info("save a couple of students");
-				grepository.save(new Category("IT"));
-				grepository.save(new Category("(Business"));
-				grepository.save(new Category("Law"));
+				grepository.save(new Category("Horror"));
+				grepository.save(new Category("Fantasy"));
+				grepository.save(new Category("Comedy"));
 				
 				};
 

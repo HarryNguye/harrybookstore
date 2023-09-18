@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.harrybookstore.domain.Book;
 import com.example.harrybookstore.domain.BookRepository;
 import com.example.harrybookstore.domain.CategoryRepository;
+import com.example.harrybookstore.domain.Category;
+
 
 @Controller
 public class BookController {
@@ -38,7 +40,7 @@ public class BookController {
 	@RequestMapping(value = "/add")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
-    	model.addAttribute("category", grepository.findAll());
+    	model.addAttribute("categories", grepository.findAll());
 
 		return "addbook";
 	}
@@ -67,10 +69,12 @@ public class BookController {
 	public String editBook(@PathVariable("id") Long Id, Model model) {
 
 		Optional<Book> optionalBook = repository.findById(Id);
-		model.addAttribute("category", grepository.findAll());
+		
 		if (optionalBook.isPresent()) {
 			Book book = optionalBook.get();
 			model.addAttribute("book", book);
+			model.addAttribute("categories", grepository.findAll());
+			
 			return "editbook";
 		} else {
 			return "redirect:/booklist";
@@ -89,6 +93,7 @@ public class BookController {
 	        existingBook.setTitle(updatedBook.getTitle());
 	        existingBook.setIsbn(updatedBook.getIsbn());
 	        existingBook.setPublicationYear(updatedBook.getPublicationYear());
+	        existingBook.setCategory(updatedBook.getCategory());
 	        
 	        repository.save(existingBook);
 	        return "redirect:/booklist";

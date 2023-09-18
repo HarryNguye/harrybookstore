@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
+
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Add book</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Add book</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-
 	<h1>Add book</h1>
 	<div>
 		<form th:object="${book}" th:action="@{save}" action="#" method="post">
@@ -15,16 +16,14 @@
 			<input type="text" th:field="*{isbn}" /> <label
 				for="publicationYear">Publication Year</label> <input type="text"
 				th:field="*{publicationYear}" /> <input type="submit" value="Save"></input>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="deplist">Category</label> <select id="deplist"
+				th:field="*{category}" class="form-control">
+				<option th:each="category: ${categories}"
+					th:value="${category.categoryid}" th:text="${category.name}"></option>
+			</select>
 		</form>
-		
-		<div style="clear: both; display: block; height: 10px;"></div>						
-		  	<label for="deplist">Category</label>
-			 <select id="deplist" th:field="*{category}" class="form-control">
-       			<option th:each="department: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
-    		</select>
 	</div>
-
-
-
 </body>
+
 </html>
