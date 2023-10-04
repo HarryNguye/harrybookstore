@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.harrybookstore.domain.Book;
 import com.example.harrybookstore.domain.BookRepository;
 import com.example.harrybookstore.domain.CategoryRepository;
-import com.example.harrybookstore.domain.Category;
 
 @Controller
 public class BookController {
@@ -27,6 +26,11 @@ public class BookController {
 	private CategoryRepository grepository;
 
 	// BOOK CONTROLLER
+
+	@RequestMapping(value="/login")
+	    public String login() {	
+	        return "login";
+	    }	
 
 	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
 	public String bookList(Model model) {
